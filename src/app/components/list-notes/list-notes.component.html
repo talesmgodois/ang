@@ -1,0 +1,9 @@
+<mat-sidenav #lnav mode="over" class="sidenav">
+  <div class="content">
+    <mat-list>
+      <mat-list-item *ngFor="let note of notes">
+        <app-node-detail [model]="note"></app-node-detail>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</mat-sidenav>
