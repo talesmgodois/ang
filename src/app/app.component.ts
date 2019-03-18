@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import Note from './domain/Note';
 import { Observable } from 'rxjs';
 import { StorageService } from './services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy{
 
     public title = 'adeva-notes';
 
-    constructor(private storageService:StorageService, private notesService:NotesService) { }
+    constructor(private storageService:StorageService, private notesService:NotesService, private route:Router) { }
 
     ngOnInit(): void {
         this.notesService.loadNotes();
@@ -27,6 +28,10 @@ export class AppComponent implements OnInit, OnDestroy{
 
     public getNotes():Note[] {
         return this.notesService.getNotes();
+    }
+
+    public goHome() {
+        this.route.navigate(['']);
     }
 
     ngOnDestroy(): void {

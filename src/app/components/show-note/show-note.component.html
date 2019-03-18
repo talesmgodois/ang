@@ -1,11 +1,20 @@
 <div fxLayout="column">
-    <div *ngIf="currentNode">
-        <mat-toolbar> {{ currentNode.title }}</mat-toolbar>
-        <div>
-            {{currentNode.content}}
-        </div>
+    <div *ngIf="currentNote">
+            <mat-card-header>
+                <mat-card-title> {{currentNote.title}}</mat-card-title>
+
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    {{currentNote.content}}
+                </p>
+            </mat-card-content>
+            <mat-card-actions >
+                <button mat-raised-button color="primary" (click)="edit()">EDIT</button>
+                <button mat-raised-button color="warn" (click)="delete()" >DELETE</button>
+            </mat-card-actions>
     </div>
-    <div *ngIf="!currentNode">
+    <div *ngIf="!currentNote">
         Note not found
     </div>
 </div>
