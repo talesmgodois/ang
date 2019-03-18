@@ -46,4 +46,9 @@ export class NotesService {
       this.storageService.storeNotes(this.notes);
   }
 
+  public update(note:Note){
+      let _note = this.notes.find(_note=> _note.id === _note.id);
+      _note = note.copy();
+  }
+
 }

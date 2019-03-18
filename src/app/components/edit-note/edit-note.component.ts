@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import Note from '../../domain/Note';
 import { switchMap } from 'rxjs/operators';
+import { NotesService } from '../../services/notes.service';
 
 
 @Component({
@@ -12,23 +13,26 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./edit-note.component.scss']
 })
 export class EditNoteComponent implements OnInit {
-    private selectedId:number;
-    private notes$: Observable<Note[]>;
+    
     private currentNote:Note;
+    private currentNote$:Observable<Note>;
 
-  constructor(private route: ActivatedRoute, private storageService:StorageService) { }
+    constructor(private route: ActivatedRoute, private storageService:StorageService, private notesService:NotesService) { }
 
-  ngOnInit() {
-    this.notes$ = this.route.paramMap.pipe(
-        switchMap(params => {
-          this.selectedId = +params.get('id');
-          return this.storageService.getNotes();
+    ngOnInit() {
+        this.currentNote$ = this.route.paramMap.pipe(
+            switchMap(params => {
+                return this.notesService.getNoteById(+params.get('id'))
+            })
+        );
+
+        this.currentNote$.subscribe(currentNote => {
+            this.currentNote = currentNote;
         })
-      );
+    }
 
-    this.notes$.subscribe( notes => {
-        this.currentNote = notes.find(note => note.id === this.selectedId);
-    })
-  }
+    update(note:Note) {
+        this.notesService.update(note);
+    }
 
 }

@@ -1,10 +1,11 @@
-<div fxLayout="column">
-        <div *ngIf="currentNote">
-            <mat-toolbar>Create Note</mat-toolbar>
-            <mat-toolbar> {{ node.title }}</mat-toolbar>
-        </div>
-        <div *ngIf="!currentNote">
-            Note not found
-        </div>
-    </div>
+<form class="example-form" fxLayout="column" >
+        <mat-form-field  >
+            <input matInput placeholder="Title" [(ngModel)]="currentNote.title" name="title" >
+        </mat-form-field>
     
+        <mat-form-field >
+            <textarea matInput placeholder="Write your currentNote here..." [(ngModel)]="currentNote.content" name="content"></textarea>
+        </mat-form-field>
+    
+        <button mat-button color="primary" mat-raised-button (click)="create()">Update</button>
+    </form>
