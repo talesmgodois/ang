@@ -5,7 +5,8 @@ import { AppContentComponent } from './components/app-content/app-content.compon
 
 const routes: Routes = [
   { path: 'notes', component: AppContentComponent },
-  { path: 'notes/:id', component: AppContentComponent },
+  { path: 'notes/show/:id', component: AppContentComponent },
+  { path: 'notes/edit/:id', component: AppContentComponent },
   { path: '', redirectTo: '/notes', pathMatch: 'full' }
 ];
 

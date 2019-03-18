@@ -1,42 +1,29 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  OnDestroy,
-  ChangeDetectorRef
-} from '@angular/core';
-import { MediaMatcher } from '@angular/cdk/layout';
-import Note from '../../domain/Note';
+import { Component, OnInit, Input } from '@angular/core';
 
-import { MatSidenav } from '@angular/material';
+import Note from '../../domain/Note';
 
 @Component({
   selector: 'app-list-notes',
   templateUrl: './list-notes.component.html',
   styleUrls: ['./list-notes.component.scss']
 })
-export class ListNotesComponent implements OnDestroy, OnInit {
-  public mobileQuery: MediaQueryList;
-  private _mobileQueryListener: () => void;
-
+export class ListNotesComponent implements OnInit {
   @Input()
   public notes: Note[];
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
-  }
+  public searchText: string = '';
 
-  toggleMobileNav(nav: MatSidenav) {
-    if (this.mobileQuery.matches) {
-      nav.toggle();
-    }
+  constructor() {}
+
+  public getNotes() {
+    if (this.searchText && this.searchText.trim().length === 0)
+      return this.notes;
+    return this.notes.filter(
+      note =>
+        note.content.includes(this.searchText) ||
+        note.title.includes(this.searchText)
+    );
   }
 
   ngOnInit() {}
-
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
-  }
 }
