@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import Note from '../../domain/Note';
-import { ModeNoteService } from 'src/app/services/mode-note.service';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -18,16 +17,10 @@ export class NoteComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
-    private modeNoteService: ModeNoteService
+    private route: ActivatedRoute
   ) {}
 
-  public isShowingMode(): boolean {
-    return this.modeNoteService.getMode() === 'show';
-  }
+  ngOnInit() {
 
-  public isManagingMode(): boolean {
-    return this.modeNoteService.getMode() === 'manage';
   }
-  ngOnInit() {}
 }

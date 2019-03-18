@@ -1,0 +1,10 @@
+<div fxLayout="column">
+        <div *ngIf="currentNote">
+            <mat-toolbar>Create Note</mat-toolbar>
+            <mat-toolbar> {{ node.title }}</mat-toolbar>
+        </div>
+        <div *ngIf="!currentNote">
+            Note not found
+        </div>
+    </div>
+    

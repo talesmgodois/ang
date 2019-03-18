@@ -1,3 +1,11 @@
 <div fxLayout="column">
-  <mat-toolbar> {{ model.title }}</mat-toolbar>
+    <div *ngIf="currentNode">
+        <mat-toolbar> {{ currentNode.title }}</mat-toolbar>
+        <div>
+            {{currentNode.content}}
+        </div>
+    </div>
+    <div *ngIf="!currentNode">
+        Note not found
+    </div>
 </div>

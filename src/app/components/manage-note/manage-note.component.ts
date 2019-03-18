@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { StorageService } from './../../services/storage.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-manage-note',
@@ -6,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-note.component.scss']
 })
 export class ManageNoteComponent implements OnInit {
-  constructor() {}
+
+  constructor(private route: ActivatedRoute, private storageService:StorageService) { }
 
   ngOnInit() {}
 }

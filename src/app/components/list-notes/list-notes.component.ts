@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import Note from '../../domain/Note';
+import { NotesService } from '../../services/notes.service';
 
 @Component({
   selector: 'app-list-notes',
@@ -13,16 +14,19 @@ export class ListNotesComponent implements OnInit {
 
   public searchText: string = '';
 
-  constructor() {}
+  constructor(private notesService:NotesService) {}
 
-  public getNotes() {
-    if (this.searchText && this.searchText.trim().length === 0)
-      return this.notes;
-    return this.notes.filter(
-      note =>
-        note.content.includes(this.searchText) ||
-        note.title.includes(this.searchText)
-    );
+  public getNotes():Note[]{
+    const str = this.searchText;  
+    if(str && str.length > 0){
+        return this.notes.filter( _note => _note.content.includes(str) || _note.title.includes(str));
+      } else { 
+          return this.notes;
+      }
+  }
+
+  deleteAll() {
+      this.notesService.deleteAll();
   }
 
   ngOnInit() {}

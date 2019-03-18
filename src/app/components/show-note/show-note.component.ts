@@ -1,5 +1,10 @@
+import { NotesService } from './../../services/notes.service';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import Note from 'src/app/domain/Note';
+import { StorageService } from '../../services/storage.service';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-show-note',
@@ -7,10 +12,25 @@ import Note from 'src/app/domain/Note';
   styleUrls: ['./show-note.component.scss']
 })
 export class ShowNoteComponent implements OnInit {
-  @Input()
-  public model: Note;
+    private selectedId:number;
+    private currentNote:Note;
+    note:Note;
+    private notes:Note[];
+    private currentNote$:Observable<Note>;
 
-  constructor() {}
+    constructor(private notesService:NotesService, private route:ActivatedRoute) {}
 
-  ngOnInit() {}
+    ngOnInit() {
+        this.currentNote$ = this.route.paramMap.pipe(
+            switchMap(params => {
+                return this.notesService.getNoteById(+params.get('id'))
+            })
+        );
+
+        this.currentNote$.subscribe(currentNote => {
+            this.currentNote = currentNote;
+        })
+    }
+
+
 }

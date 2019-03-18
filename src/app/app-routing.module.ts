@@ -1,27 +1,31 @@
+import { EditNoteComponent } from './components/edit-note/edit-note.component';
+import { CreateNoteComponent } from './components/create-note/create-note.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
-import { AppContentComponent } from './components/app-content/app-content.component';
 import { ShowNoteComponent } from './components/show-note/show-note.component';
-import { ManageNoteComponent } from './components/manage-note/manage-note.component';
+
+import { RouteNotFoundComponent } from './components/route-not-found/route-not-found.component';
 
 const routes: Routes = [
   {
-    path: 'notes',
-    component: AppContentComponent,
-    children: [
-      {
-        path: ':id',
-        component: ShowNoteComponent
-      },
-      {
-        path: 'edit',
-        component: ManageNoteComponent
-      }
-    ]
+    path: 'notes/create',
+    component:  CreateNoteComponent
+  },
+  {
+    path: 'notes/edit/:id',
+    component: EditNoteComponent
+  },
+  {
+    path: 'notes/show/:id',
+    component: ShowNoteComponent
   },
 
-  { path: '', redirectTo: '/notes', pathMatch: 'full' }
+  { path: '', redirectTo: '/notes/create', pathMatch: 'full' },
+  
+  {
+    path: '**',
+    component: RouteNotFoundComponent
+  },
 ];
 
 @NgModule({
