@@ -15,6 +15,8 @@ import { AppContentComponent } from './components/app-content/app-content.compon
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { ManageNoteComponent } from './components/manage-note/manage-note.component';
+import { ShowNoteComponent } from './components/show-note/show-note.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { FormsModule } from '@angular/forms';
     ListNotesComponent,
     NoteComponent,
     NodeDetailComponent,
-    AppContentComponent
+    AppContentComponent,
+    ManageNoteComponent,
+    ShowNoteComponent
   ],
   imports: [
     BrowserModule,

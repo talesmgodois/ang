@@ -2,11 +2,25 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppContentComponent } from './components/app-content/app-content.component';
+import { ShowNoteComponent } from './components/show-note/show-note.component';
+import { ManageNoteComponent } from './components/manage-note/manage-note.component';
 
 const routes: Routes = [
-  { path: 'notes', component: AppContentComponent },
-  { path: 'notes/show/:id', component: AppContentComponent },
-  { path: 'notes/edit/:id', component: AppContentComponent },
+  {
+    path: 'notes',
+    component: AppContentComponent,
+    children: [
+      {
+        path: ':id',
+        component: ShowNoteComponent
+      },
+      {
+        path: 'edit',
+        component: ManageNoteComponent
+      }
+    ]
+  },
+
   { path: '', redirectTo: '/notes', pathMatch: 'full' }
 ];
 

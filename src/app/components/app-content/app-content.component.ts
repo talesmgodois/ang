@@ -14,7 +14,9 @@ export class AppContentComponent implements OnInit {
 
   currentNote: Note;
 
-  constructor() {}
+  constructor() {
+    this.currentNote = this.notes[0];
+  }
 
   ngOnInit() {}
 }
