@@ -48,6 +48,14 @@ export class NotesService {
     this.storageService.storeNotes(this.notes);
   }
 
+  public setCurrentNote(note: Note): void {
+    this.storageService.storeCurrentNote(note);
+  }
+
+  public getCurrentNote() {
+    return this.storageService.getCurrentNote();
+  }
+
   public update(note: Note) {
     let _index = this.notes.findIndex(_note => _note.id === note.id);
     this.notes[_index] = note;

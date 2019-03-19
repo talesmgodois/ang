@@ -11,29 +11,34 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./show-note.component.scss']
 })
 export class ShowNoteComponent implements OnInit {
-    private currentNote:Note;
-    private currentNote$:Observable<Note>;
+  private currentNote: Note;
+  private currentNote$: Observable<Note>;
 
-    constructor(private notesService:NotesService, private route:ActivatedRoute, private router:Router) {}
+  constructor(
+    private notesService: NotesService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-    ngOnInit() {
-        this.currentNote$ = this.route.paramMap.pipe(
-            switchMap(params => {
-                return this.notesService.getNoteById(+params.get('id'))
-            })
-        );
+  ngOnInit() {
+    this.currentNote$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        return this.notesService.getNoteById(+params.get('id'));
+      })
+    );
 
-        this.currentNote$.subscribe(currentNote => {
-            this.currentNote = currentNote;
-        })
-    }
+    this.currentNote$.subscribe(currentNote => {
+      this.currentNote = currentNote;
+      this.notesService.setCurrentNote(this.currentNote);
+    });
+  }
 
-    delete(){
-        this.notesService.delete(this.currentNote);
-        this.router.navigate(['']);
-    }
+  delete() {
+    this.notesService.delete(this.currentNote);
+    this.router.navigate(['']);
+  }
 
-    edit() {
-        this.router.navigate(['notes/edit/'+ this.currentNote.id]);
-    }
+  edit() {
+    this.router.navigate(['notes/edit/' + this.currentNote.id]);
+  }
 }

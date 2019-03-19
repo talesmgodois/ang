@@ -11,14 +11,10 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./node-detail.component.scss']
 })
 export class NodeDetailComponent implements OnInit {
-  private currentNote$: Observable<Note>;
   public currentNote: Note;
+  readonly ACTIVE_COLOR: 'rgb(202, 199, 255)';
 
-  constructor(
-    private notesService: NotesService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private notesService: NotesService, private router: Router) {}
 
   @Input()
   public model: Note;
@@ -28,29 +24,21 @@ export class NodeDetailComponent implements OnInit {
   }
 
   public navigate() {
+    this.notesService.setCurrentNote(this.model);
     this.router.navigate(['notes/show/' + this.model.id]);
   }
 
   public isActive() {
-    if (this.model && this.currentNote) {
-      return this.currentNote.id === this.model.id;
+    const currentNote = this.notesService.getCurrentNote();
+    if (this.model && currentNote) {
+      return currentNote.id === this.model.id;
     }
     return false;
   }
 
   public getStyle(): any {
-    return this.isActive() ? { 'background-color': '#c5c5c5' } : {};
+    return this.isActive() ? { 'background-color': 'rgb(202,199,255)' } : {};
   }
 
-  ngOnInit() {
-    this.currentNote$ = this.route.paramMap.pipe(
-      switchMap(params => {
-        return this.notesService.getNoteById(+params.get('id'));
-      })
-    );
-
-    this.currentNote$.subscribe(currentNote => {
-      this.currentNote = Note.copy(currentNote);
-    });
-  }
+  ngOnInit() {}
 }

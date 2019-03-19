@@ -7,7 +7,7 @@ import Note from '../domain/Note';
 export class StorageService {
   constructor() {}
   readonly NOTES = 'notes';
-  readonly LAST_NOTE = 'lastNote';
+  readonly CURRENT_NOTE = 'currentNote';
 
   public notes: Note[];
 
@@ -20,7 +20,11 @@ export class StorageService {
   }
 
   private getObjFromJson(str: string): any {
-    return JSON.parse(str);
+    try {
+      return JSON.parse(str);
+    } catch (e) {
+      return null;
+    }
   }
 
   public getObj(key: string): any {
@@ -29,6 +33,14 @@ export class StorageService {
 
   public storeNotes(notes: Note[]): void {
     this.store(this.NOTES, notes);
+  }
+
+  public storeCurrentNote(note: Note): void {
+    this.store(this.CURRENT_NOTE, note);
+  }
+
+  public getCurrentNote(): Note {
+    return this.getObj(this.CURRENT_NOTE);
   }
 
   public getNotes(): Note[] {

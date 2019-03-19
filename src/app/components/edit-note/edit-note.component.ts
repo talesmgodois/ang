@@ -29,6 +29,7 @@ export class EditNoteComponent implements OnInit {
 
     this.currentNote$.subscribe(currentNote => {
       this.currentNote = Note.copy(currentNote);
+      this.notesService.setCurrentNote(this.currentNote);
     });
   }
 
