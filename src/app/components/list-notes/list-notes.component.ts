@@ -14,19 +14,21 @@ export class ListNotesComponent implements OnInit {
 
   public searchText: string = '';
 
-  constructor(private notesService:NotesService) {}
+  constructor(private notesService: NotesService) {}
 
-  public getNotes():Note[]{
-    const str = this.searchText;  
-    if(str && str.length > 0){
-        return this.notes.filter( _note => _note.content.includes(str) || _note.title.includes(str));
-      } else { 
-          return this.notes;
-      }
+  public getNotes(): Note[] {
+    const str = this.searchText;
+    if (str && str.length > 0) {
+      return this.notes.filter(
+        _note => _note.content.includes(str) || _note.title.includes(str)
+      );
+    } else {
+      return this.notes;
+    }
   }
 
   deleteAll() {
-      this.notesService.deleteAll();
+    this.notesService.deleteAll();
   }
 
   ngOnInit() {}

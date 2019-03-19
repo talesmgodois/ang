@@ -12,16 +12,13 @@ import { StorageService } from './../../services/storage.service';
   styleUrls: ['./create-note.component.scss']
 })
 export class CreateNoteComponent implements OnInit {
+  public note: Note = new Note();
 
-    public note:Note = new Note();
+  constructor(private notesService: NotesService) {}
 
-    constructor(private route:ActivatedRoute, private notesService:NotesService) { }
+  create() {
+    this.notesService.create(this.note);
+  }
 
-    create() {
-        this.notesService.create(this.note);
-    }
-
-    ngOnInit() {
-
-    }
+  ngOnInit() {}
 }

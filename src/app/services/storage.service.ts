@@ -11,7 +11,7 @@ export class StorageService {
   readonly NOTES = 'notes';
   readonly LAST_NOTE = 'lastNote';
 
-  public notes:Note[];
+  public notes: Note[];
 
   private store(key: string, obj: Object): void {
     localStorage.setItem(key, this.getJson(obj));
@@ -33,25 +33,24 @@ export class StorageService {
     this.store(this.NOTES, notes);
   }
 
-  public getNotes():Note[]{
-    const notes = this.getObj(this.NOTES)
-    
-    return notes? notes: [];
+  public getNotes(): Note[] {
+    const notes = this.getObj(this.NOTES);
+
+    return notes ? notes : [];
   }
 
-  public getLastNote(): Note{
-      const notes = this.getObj(this.NOTES); 
-      return notes ? notes[notes.length -1]: null;
+  public getLastNote(): Note {
+    const notes = this.getObj(this.NOTES);
+    return notes ? notes[notes.length - 1] : null;
   }
 
-  public getNewNoteId():number {
+  public getNewNoteId(): number {
     const last = this.getLastNote();
-    if(last && last.id) return last.id +1;
+    if (last && last.id) return last.id + 1;
     else return 1;
   }
 
-
-  public deleteNote(id:number) {
-        const notes = this.getNotes();
-    }   
+  public deleteNote(id: number) {
+    const notes = this.getNotes();
+  }
 }

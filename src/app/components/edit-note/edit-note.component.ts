@@ -6,33 +6,34 @@ import Note from '../../domain/Note';
 import { switchMap } from 'rxjs/operators';
 import { NotesService } from '../../services/notes.service';
 
-
 @Component({
   selector: 'app-edit-note',
   templateUrl: './edit-note.component.html',
   styleUrls: ['./edit-note.component.scss']
 })
 export class EditNoteComponent implements OnInit {
-    
-    private currentNote:Note;
-    private currentNote$:Observable<Note>;
+  public currentNote: Note;
+  private currentNote$: Observable<Note>;
 
-    constructor(private route: ActivatedRoute, private storageService:StorageService, private notesService:NotesService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private storageService: StorageService,
+    private notesService: NotesService
+  ) {}
 
-    ngOnInit() {
-        this.currentNote$ = this.route.paramMap.pipe(
-            switchMap(params => {
-                return this.notesService.getNoteById(+params.get('id'))
-            })
-        );
+  ngOnInit() {
+    this.currentNote$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        return this.notesService.getNoteById(+params.get('id'));
+      })
+    );
 
-        this.currentNote$.subscribe(currentNote => {
-            this.currentNote = currentNote;
-        })
-    }
+    this.currentNote$.subscribe(currentNote => {
+      this.currentNote = Note.copy(currentNote);
+    });
+  }
 
-    update(note:Note) {
-        this.notesService.update(note);
-    }
-
+  update() {
+    this.notesService.update(this.currentNote);
+  }
 }
