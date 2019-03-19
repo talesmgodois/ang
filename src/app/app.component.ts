@@ -10,32 +10,27 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy{
-    private selectedId:number;
-    private notes$: Observable<Note[]>;
-    private currentNote:Note;
+export class AppComponent implements OnInit, OnDestroy {
+  public title = 'adeva-notes';
 
-    public title = 'adeva-notes';
+  constructor(private notesService: NotesService, private route: Router) {}
 
-    constructor(private storageService:StorageService, private notesService:NotesService, private route:Router) { }
+  ngOnInit(): void {
+    this.notesService.loadNotes();
+    window.onbeforeunload = ev => {
+      this.notesService.dispatchStorage();
+    };
+  }
 
-    ngOnInit(): void {
-        this.notesService.loadNotes();
-        window.onbeforeunload = (ev) => {
-            this.notesService.dispatchStorage();
-        }
-    }
+  public getNotes(): Note[] {
+    return this.notesService.getNotes();
+  }
 
-    public getNotes():Note[] {
-        return this.notesService.getNotes();
-    }
+  public goHome() {
+    this.route.navigate(['']);
+  }
 
-    public goHome() {
-        this.route.navigate(['']);
-    }
-
-    ngOnDestroy(): void {
-        this.notesService.dispatchStorage();
-    }
-
+  ngOnDestroy(): void {
+    this.notesService.dispatchStorage();
+  }
 }

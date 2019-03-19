@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import Note from '../domain/Note';
-import { Observable, of } from 'rxjs';
-import { last } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -37,20 +35,5 @@ export class StorageService {
     const notes = this.getObj(this.NOTES);
 
     return notes ? notes : [];
-  }
-
-  public getLastNote(): Note {
-    const notes = this.getObj(this.NOTES);
-    return notes ? notes[notes.length - 1] : null;
-  }
-
-  public getNewNoteId(): number {
-    const last = this.getLastNote();
-    if (last && last.id) return last.id + 1;
-    else return 1;
-  }
-
-  public deleteNote(id: number) {
-    const notes = this.getNotes();
   }
 }

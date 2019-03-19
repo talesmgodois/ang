@@ -17,7 +17,6 @@ export class EditNoteComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private storageService: StorageService,
     private notesService: NotesService
   ) {}
 

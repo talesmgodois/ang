@@ -17,10 +17,6 @@ export default class Note {
     return new Note(this.title, this.content, id);
   }
 
-  public copy(): Note {
-    return new Note(this.title, this.content, this.id);
-  }
-
   public static copy(note: Note) {
     if (note) {
       return new Note(note.title, note.content, note.id);
