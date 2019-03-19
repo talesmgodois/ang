@@ -6,7 +6,7 @@ import { ShowNoteComponent } from './components/show-note/show-note.component';
 
 import { RouteNotFoundComponent } from './components/route-not-found/route-not-found.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'notes/create',
     component:  CreateNoteComponent

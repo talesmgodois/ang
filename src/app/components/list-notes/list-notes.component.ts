@@ -10,7 +10,7 @@ import { NotesService } from '../../services/notes.service';
 })
 export class ListNotesComponent implements OnInit {
   @Input()
-  public notes: Note[];
+  public notes: Note[] = [];
 
   public searchText: string = '';
 
@@ -18,13 +18,16 @@ export class ListNotesComponent implements OnInit {
 
   public getNotes(): Note[] {
     const str = this.searchText;
-    if (str && str.length > 0) {
-      return this.notes.filter(
-        _note => _note.content.includes(str) || _note.title.includes(str)
-      );
-    } else {
-      return this.notes;
-    }
+    if (str) 
+    {
+        if(str.length > 0){
+            return this.notes.filter(
+                _note => _note.content.includes(str) || _note.title.includes(str)
+            );
+        }
+
+    } 
+    return this.notes;
   }
 
   deleteAll() {

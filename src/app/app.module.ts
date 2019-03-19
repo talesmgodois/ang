@@ -1,3 +1,4 @@
+import { MaterialModule } from './material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -21,6 +22,7 @@ import {MatCardModule} from '@angular/material/card';
 import { EditNoteComponent } from './components/edit-note/edit-note.component';
 import { CreateNoteComponent } from './components/create-note/create-note.component';
 import { RouteNotFoundComponent } from './components/route-not-found/route-not-found.component';
+import {APP_BASE_HREF} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -46,9 +48,10 @@ import { RouteNotFoundComponent } from './components/route-not-found/route-not-f
     MatInputModule,
     FormsModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MaterialModule
   ],
-  providers: [],
+  providers: [{provide: APP_BASE_HREF, useValue : '/' }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

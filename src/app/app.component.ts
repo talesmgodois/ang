@@ -4,6 +4,7 @@ import Note from './domain/Note';
 import { Observable } from 'rxjs';
 import { StorageService } from './services/storage.service';
 import { Router } from '@angular/router';
+import { MaterialModule } from './material/material.module';
 
 @Component({
   selector: 'app-root',
