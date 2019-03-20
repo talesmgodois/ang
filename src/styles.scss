@@ -17,23 +17,21 @@ body {
 }
 
 .container {
-    position: absolute;
-    top:64px;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-  
 .leftNav {
-width: 370px;
+  width: 370px;
 }
-  
+
 .example-spacer {
   flex: 1 1 auto;
 }
 
-
 .clickable {
-    cursor: pointer;
+  cursor: pointer;
 }
