@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import Note from '../../domain/Note';
+import {Note} from '../../domain/Note';
 import { NotesService } from '../../services/notes.service';
 
 @Component({

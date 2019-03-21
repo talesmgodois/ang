@@ -21,53 +21,60 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { ManageNoteComponent } from './components/manage-note/manage-note.component';
 import { ShowNoteComponent } from './components/show-note/show-note.component';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { EditNoteComponent } from './components/edit-note/edit-note.component';
 import { CreateNoteComponent } from './components/create-note/create-note.component';
 import { RouteNotFoundComponent } from './components/route-not-found/route-not-found.component';
 
-import Note from './domain/Note';
+import { Note } from './domain/Note';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        MaterialModule,
-        FormsModule,
-        BrowserAnimationsModule
-      ],
-      declarations: [
-        AppComponent,
-        ListNotesComponent,
-        ManageNoteComponent,
-        NodeDetailComponent,
-        ManageNoteComponent,
-        RouteNotFoundComponent,
-        ShowNoteComponent,
-        EditNoteComponent,
-        CreateNoteComponent
-      ]
-    }).compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                RouterTestingModule,
+                MaterialModule,
+                FormsModule,
+                BrowserAnimationsModule
+            ],
+            declarations: [
+                AppComponent,
+                ListNotesComponent,
+                ManageNoteComponent,
+                NodeDetailComponent,
+                ManageNoteComponent,
+                RouteNotFoundComponent,
+                ShowNoteComponent,
+                EditNoteComponent,
+                CreateNoteComponent
+            ]
+        }).compileComponents();
+    }));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    console.log(app);
-    expect(app).toBeTruthy();
-  });
+    it('should create the app', () => {
+        const fixture = TestBed.createComponent(AppComponent);
+        const app = fixture.debugElement.componentInstance;
+        console.log(app);
+        expect(app).toBeTruthy();
+    });
 
-  it(`should have as title 'adeva-notes'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('adeva-notes');
-  });
+    it(`should have as title 'adeva-notes'`, () => {
+        const fixture = TestBed.createComponent(AppComponent);
+        const app = fixture.debugElement.componentInstance;
+        expect(app.title).toEqual('adeva-notes');
+    });
 
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to adeva-notes!');
-  });
+    it('should render title in a h1 tag', () => {
+        const fixture = TestBed.createComponent(AppComponent);
+        fixture.detectChanges();
+        const compiled = fixture.debugElement.nativeElement;
+        expect(compiled.querySelector('h1').textContent).toContain('Welcome to adeva-notes!');
+    });
+
+    it('should render a add button', () => {
+        const fixture = TestBed.createComponent(AppComponent);
+        fixture.detectChanges();
+        const compiled = fixture.debugElement.nativeElement;
+        expect(compiled.querySelector('mat-icon').textContent).toContain('add');
+    })
 });
