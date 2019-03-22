@@ -14,47 +14,57 @@ import { Note } from '../../domain/Note';
 import { Router } from '@angular/router';
 
 class MockRouter {
-    navigateByUrl(url: string) { return url; }
+  navigateByUrl(url: string) {
+    return url;
+  }
 }
 
-
 describe('ShowNoteComponent', () => {
-    let component: ShowNoteComponent;
-    let fixture: ComponentFixture<ShowNoteComponent>;
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            imports: [MaterialModule, AppRoutingModule, FormsModule, RouterTestingModule.withRoutes(routes)],
-            declarations: [ShowNoteComponent, CreateNoteComponent, RouteNotFoundComponent, EditNoteComponent]
-        })
-            .compileComponents();
-    }));
+  let component: ShowNoteComponent;
+  let fixture: ComponentFixture<ShowNoteComponent>;
+  let router: Router;
+  let location: Location;
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        MaterialModule,
+        AppRoutingModule,
+        FormsModule,
+        RouterTestingModule.withRoutes(routes)
+      ],
+      declarations: [
+        ShowNoteComponent,
+        CreateNoteComponent,
+        RouteNotFoundComponent,
+        EditNoteComponent
+      ]
+    }).compileComponents();
+    router = TestBed.get(Router);
+  }));
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(ShowNoteComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ShowNoteComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-    it('should have a edit button', () => {
-        const compiled = fixture.debugElement.nativeElement;
-        // expect(component.querySelector('button').textContent).toContain('EDIT');
-        expect(1).toEqual(1);
-    });
+  it('should have a edit button', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    // expect(component.querySelector('button').textContent).toContain('EDIT');
+    expect(1).toEqual(1);
+  });
 
-    it('testing redirect', () => {
-        const noteService = TestBed.get(NotesService);
-        noteService.create(new Note("teste", "teste"));
-        noteService.create(new Note("teste", "teste"));
-        noteService.dispatchStorage();
+  it('testing redirect', () => {
+    const noteService = TestBed.get(NotesService);
+    noteService.create(new Note('teste', 'teste'));
+    noteService.create(new Note('teste', 'teste'));
+    noteService.dispatchStorage();
 
-        console.log(noteService.getNotes());
-        expect(1).toEqual(1);
-
-    });
-
+    console.log(noteService.getNotes());
+    expect(1).toEqual(1);
+  });
 });
-;
