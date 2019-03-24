@@ -24,6 +24,7 @@ describe('ShowNoteComponent', () => {
   let fixture: ComponentFixture<ShowNoteComponent>;
   let router: Router;
   let location: Location;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
